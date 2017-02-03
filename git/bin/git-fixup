@@ -1,0 +1,53 @@
+#!/usr/bin/env bash -e
+
+usage() {
+cat <<HERE
+usage: git fixup # stage all files if there is no staged files and commit --fixup=HEAD
+HERE
+}
+case $# in
+  0) ;;
+  *) >&2 echo "error: too many arguments." && usage && exit 1 ;;
+esac
+
+unstaged=0
+# tracked unstaged
+if [ "$(git diff --name-only)" != "" ] ; then
+  unstaged=1
+fi
+# untracked unstaged
+if [ "$(git ls-files . --exclude-standard --others)" != "" ] ; then
+  unstaged=1
+fi
+
+staged=0
+if [ "$(git diff --staged --name-only)" != "" ] ; then
+  staged=1
+fi
+
+case $staged in
+  0)
+    case $unstaged in
+      0) echo "Nothing to do" && exit 0;;
+      1) git add .;;
+    esac
+    ;;
+  1)
+    case $unstaged in
+      0) ;;
+      1)
+        echo "Do you want to include unstaged file(s)?"
+        echo -n "[y/N]: "
+        read res
+        case "${res}" in
+          "Y" | "y" | "yes" | "Yes" | "YES" )
+            git add .;;
+          * )
+            ;;
+        esac
+        ;;
+    esac
+    ;;
+esac
+
+git commit --fixup=HEAD

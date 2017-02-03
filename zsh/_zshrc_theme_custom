@@ -1,0 +1,7 @@
+# my extra theme
+SPROMPT="%F{yellow}you meant '%F{red}%r%F{yellow}'? %F{white}[%Uy%ues, %Un%uo, %Ua%ubort, %Ue%udit]:%f "
+prompt_continue() {
+  prompt_segment yellow black " continue "
+  prompt_end
+}
+PROMPT2="$(prompt_continue) "

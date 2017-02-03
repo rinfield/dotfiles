@@ -1,0 +1,10 @@
+[credential]
+	helper = osxkeychain
+
+# Beautiful diffs (2.9〜)
+# https://github.com/blog/2188-git-2-9-has-been-released
+# http://qiita.com/takyam/items/d6afacc7934de9b0e85e
+[pager]
+	log  = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less

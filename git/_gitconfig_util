@@ -1,0 +1,12 @@
+[rebase]
+	autostash = true
+
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+
+# Always verbose commit (2.9〜)
+[commit]
+	verbose = true
+
+[diff]
+	compactionHeuristic = true

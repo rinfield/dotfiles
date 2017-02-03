@@ -1,0 +1,24 @@
+[alias]
+	ad    = add
+	ada   = add --all
+	adac  = !git add --all && git commit
+	br    = branch
+	cm    = commit
+	cma   = commit --amend
+	cmf   = commit --fixup
+	co    = checkout
+	conf  = config --list --includes
+	df    = diff
+	dfs   = diff --staged
+	fe    = fetch --verbose
+	fix   = !git add --all && git commit --fixup HEAD
+	ll    = log --pretty=fuller --abbrev-commit --date=iso8601 --stat --decorate --graph --parents
+	lo    = log --oneline
+	master = checkout master
+	pl    = pull --ff-only
+	ps    = push
+	rb    = rebase
+	rbi   = rebase --interactive
+	rs    = reset
+	rsf   = reset --
+	st    = status

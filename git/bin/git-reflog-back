@@ -1,0 +1,25 @@
+#!/usr/bin/env bash -e
+
+usage() {
+cat <<HERE
+usage: git reflog-back          # show 15 lines of reflog and 'reset --hard' to specified state.
+   or: git reflog-back <number> # show <number> lines of reflog and 'reset --hard' to specified state.
+HERE
+}
+
+reflogLines=15
+
+case $# in
+  0) ;;
+  1) reflogLines=$1;;
+  *) >&2 echo "error: too many arguments." && usage && exit 1 ;;
+esac
+
+echo "----------"
+git reflog | head -n $reflogLines
+echo "----------"
+
+echo -n "Input the number you want to go back (n in 'HEAD@{n}'): "
+read reflogNumber
+
+git reset --hard HEAD@{$reflogNumber}

@@ -1,0 +1,20 @@
+alias at="atom ."
+alias vi="vim"
+alias g="git"
+alias gi="git"
+alias cls="clear"
+alias ls="ls -G"
+alias sl="ls"
+alias ll="ls -lAGh"
+alias du="du -h"
+alias df="df -h"
+alias scala="scala -Dscala.color -Dfile.encoding=UTF-8"
+alias bu="brew update"
+alias bo="brew outdated"
+alias history="history -f"
+# VSCode command
+function code {
+  local argPath="$1"
+  [[ $1 = /* ]] && argPath="$1" || argPath="$PWD/${1#./}"
+  open -a "Visual Studio Code" "$argPath"
+}

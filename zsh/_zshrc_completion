@@ -1,0 +1,14 @@
+fpath=(/usr/local/share/zsh-completions $fpath)
+autoload -Uz compinit
+compinit
+setopt prompt_subst
+setopt autopushd
+setopt pushd_ignore_dups
+setopt auto_cd
+setopt list_packed
+setopt list_types
+setopt correct
+setopt nolistbeep
+zstyle ':completion:*' list-colors ''
+# case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'

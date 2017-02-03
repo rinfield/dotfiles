@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+usage() {
+cat <<HERE
+usage: git clean-branch           # delete all local branches that starts with 'topic/'
+   or: git clean-branch <pattern> # delete all local branches that matches <pattern>
+HERE
+}
+
+preservingBranch=master
+
+case $# in
+  0) pattern="^topic/";;
+  1) pattern="$1";;
+  *) >&2 echo "error: too many arguments." && usage && exit 1 ;;
+esac
+
+git checkout $preservingBranch 1>/dev/null 2>/dev/null
+deletingBranches=($(git branch | tr -d " " | grep -v "$preservingBranch" | grep -E "$pattern"))
+if [ ${#deletingBranches[@]} -eq 0 ]; then
+  echo "No branch to delete."
+  exit 0
+fi
+
+echo "Are you sure you want to delete these local branch(es)? (matches '$pattern')"
+for deletingBranch in "${deletingBranches[@]}" ; do
+  echo " * $deletingBranch"
+done
+echo -n "[y/N]: "
+
+read res
+case "${res}" in
+  "Y" | "y" | "yes" | "Yes" | "YES" )
+    for deletingBranch in "${deletingBranches[@]}" ; do
+      git branch -D $deletingBranch
+    done
+    ;;
+  * )
+    echo "Canceled."
+    ;;
+esac

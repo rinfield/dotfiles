@@ -1,0 +1,19 @@
+#!/usr/bin/env bash -e
+
+usage() {
+cat <<HERE
+usage: git push-asis          # force push current branch to origin
+   or: git push-asis <remote> # force push current branch to <remote>
+HERE
+}
+
+remote=origin
+
+case $# in
+  0) ;;
+  1) remote="$1";;
+  *) >&2 echo "error: too many arguments." && usage && exit 1 ;;
+esac
+
+currentBranch=$(git branch | grep \* | cut -d ' ' -f2)
+git push --force --set-upstream $remote $currentBranch

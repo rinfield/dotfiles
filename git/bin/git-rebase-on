@@ -1,0 +1,21 @@
+#!/usr/bin/env bash -e
+
+usage() {
+cat <<HERE
+usage: git rebase-on                   # rebase current branch on top of origin/master
+usage: git rebase-on <branch>          # rebase current branch on top of origin/<branch>
+usage: git rebase-on <branch> <remote> # rebase current branch on top of <remote>/<branch>
+HERE
+}
+
+baseBranch=master
+remote=origin
+
+case $# in
+  0) ;;
+  1) baseBranch="$1";;
+  2) baseBranch="$1"; remote="$2";;
+  *) >&2 echo "error: too many arguments." && usage && exit 1 ;;
+esac
+
+echo git pull --rebase $remote $baseBranch

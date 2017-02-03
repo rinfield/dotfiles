@@ -1,0 +1,19 @@
+#!/usr/bin/env bash -e
+
+usage() {
+cat <<HERE
+usage: git topic <topic-name>               # checkout new branch 'topic/<topic-name>' from master
+usage: git topic <topic-name> <base-branch> # checkout new branch 'topic/<topic-name>' from <basebranch>
+HERE
+}
+
+baseBranch="master"
+
+case $# in
+  1) topicName="$1";;
+  2) topicName="$1" && baseBranch="$2";;
+  *) >&2 echo "error: too many arguments." && usage && exit 1 ;;
+esac
+
+git checkout "$baseBranch"
+git checkout -b "topic/$topicName"

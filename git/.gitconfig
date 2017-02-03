@@ -1,0 +1,8 @@
+[user]
+	name = Ryo Uchino
+	email = rinfield@gmail.com
+[include]
+	path = "~/dotfiles_shared/gitconfig_mandatory"
+	path = "~/dotfiles/git/_gitconfig_util"
+	path = "~/dotfiles/git/_gitconfig_alias"
+	path = "~/dotfiles/git/_gitconfig_macosx"
